@@ -396,7 +396,7 @@
 							<div class="col-sm-6">
 							
                                <p align="center">
-                                    <img src="assets/alur.png" align="center" width="600" style="max-width: 100%" />
+                                    <img src="assets/alurppdb.png" align="center" width="600" style="max-width: 100%" />
                                 </p>
 										
                             </div>
@@ -547,7 +547,7 @@
 							<br>
 							<div class="col-sm-6">
                                <p align="center">
-                                    <img src="assets/alur.png" align="center" width="600" style="max-width: 90%" />
+                                    <img src="assets/alurppdb.png" align="center" width="600" style="max-width: 90%" />
                                 </p>
                             </div>
                         </div>
