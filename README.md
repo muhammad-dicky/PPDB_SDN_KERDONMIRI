@@ -14,7 +14,7 @@ URL login admin: http://localhost/ppdb/login/
 - Username admin: admin
 - Password admin: admin
 
-URL login user:
+URL login user (test user):
 - Username user: 12345123
 - Password user: 12345123
 
