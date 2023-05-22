@@ -108,7 +108,8 @@ require_once '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
 $dompdf = new Dompdf();
-$dompdf->loadHtml($html);
+$dompdf->loadHtml($html,'UTF-8');
+
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $dompdf->stream("surat_pernyataan.pdf", array("Attachment" => false));

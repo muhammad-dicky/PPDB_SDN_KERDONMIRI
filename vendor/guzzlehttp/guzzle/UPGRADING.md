@@ -259,7 +259,7 @@ has been implemented yet, but hoping to utilize a PSR cache interface).
 - `keySearch` has been removed.
 - `getPath` no longer supports wildcard expressions. Use something better like
   JMESPath for this.
-- `setPath` now supports apDiverifikasi to an existing array via the `[]` notation.
+- `setPath` now supports appending to an existing array via the `[]` notation.
 
 ### Events
 

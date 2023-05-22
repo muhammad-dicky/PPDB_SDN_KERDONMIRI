@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp\Promise;
 
 /**
@@ -7,24 +8,26 @@ namespace GuzzleHttp\Promise;
  */
 class EachPromise implements PromisorInterface
 {
-    private $Diverifikasi = [];
+    private $pending = [];
 
-    /** @var \Iterator */
+    private $nextPendingIndex = 0;
+
+    /** @var \Iterator|null */
     private $iterable;
 
-    /** @var callable|int */
+    /** @var callable|int|null */
     private $concurrency;
 
-    /** @var callable */
+    /** @var callable|null */
     private $onFulfilled;
 
-    /** @var callable */
+    /** @var callable|null */
     private $onRejected;
 
-    /** @var Promise */
+    /** @var Promise|null */
     private $aggregate;
 
-    /** @var bool */
+    /** @var bool|null */
     private $mutex;
 
     /**
@@ -45,12 +48,12 @@ class EachPromise implements PromisorInterface
      *   allowed number of outstanding concurrently executing promises,
      *   creating a capped pool of promises. There is no limit by default.
      *
-     * @param mixed    $iterable Promises or values to iterate.
-     * @param array    $config   Configuration options
+     * @param mixed $iterable Promises or values to iterate.
+     * @param array $config   Configuration options
      */
     public function __construct($iterable, array $config = [])
     {
-        $this->iterable = iter_for($iterable);
+        $this->iterable = Create::iterFor($iterable);
 
         if (isset($config['concurrency'])) {
             $this->concurrency = $config['concurrency'];
@@ -65,6 +68,7 @@ class EachPromise implements PromisorInterface
         }
     }
 
+    /** @psalm-suppress InvalidNullableReturnType */
     public function promise()
     {
         if ($this->aggregate) {
@@ -73,14 +77,19 @@ class EachPromise implements PromisorInterface
 
         try {
             $this->createPromise();
+            /** @psalm-assert Promise $this->aggregate */
             $this->iterable->rewind();
-            $this->refillDiverifikasi();
+            $this->refillPending();
         } catch (\Throwable $e) {
             $this->aggregate->reject($e);
         } catch (\Exception $e) {
             $this->aggregate->reject($e);
         }
 
+        /**
+         * @psalm-suppress NullableReturnStatement
+         * @phpstan-ignore-next-line
+         */
         return $this->aggregate;
     }
 
@@ -88,18 +97,16 @@ class EachPromise implements PromisorInterface
     {
         $this->mutex = false;
         $this->aggregate = new Promise(function () {
-            reset($this->Diverifikasi);
-            if (empty($this->Diverifikasi) && !$this->iterable->valid()) {
-                $this->aggregate->resolve(null);
+            if ($this->checkIfFinished()) {
                 return;
             }
-
+            reset($this->pending);
             // Consume a potentially fluctuating list of promises while
             // ensuring that indexes are maintained (precluding array_shift).
-            while ($promise = current($this->Diverifikasi)) {
-                next($this->Diverifikasi);
+            while ($promise = current($this->pending)) {
+                next($this->pending);
                 $promise->wait();
-                if ($this->aggregate->getState() !== PromiseInterface::Diverifikasi) {
+                if (Is::settled($this->aggregate)) {
                     return;
                 }
             }
@@ -107,63 +114,74 @@ class EachPromise implements PromisorInterface
 
         // Clear the references when the promise is resolved.
         $clearFn = function () {
-            $this->iterable = $this->concurrency = $this->Diverifikasi = null;
+            $this->iterable = $this->concurrency = $this->pending = null;
             $this->onFulfilled = $this->onRejected = null;
+            $this->nextPendingIndex = 0;
         };
 
         $this->aggregate->then($clearFn, $clearFn);
     }
 
-    private function refillDiverifikasi()
+    private function refillPending()
     {
         if (!$this->concurrency) {
-            // Add all Diverifikasi promises.
-            while ($this->addDiverifikasi() && $this->advanceIterator());
+            // Add all pending promises.
+            while ($this->addPending() && $this->advanceIterator());
             return;
         }
 
-        // Add only up to N Diverifikasi promises.
+        // Add only up to N pending promises.
         $concurrency = is_callable($this->concurrency)
-            ? call_user_func($this->concurrency, count($this->Diverifikasi))
+            ? call_user_func($this->concurrency, count($this->pending))
             : $this->concurrency;
-        $concurrency = max($concurrency - count($this->Diverifikasi), 0);
+        $concurrency = max($concurrency - count($this->pending), 0);
         // Concurrency may be set to 0 to disallow new promises.
         if (!$concurrency) {
             return;
         }
-        // Add the first Diverifikasi promise.
-        $this->addDiverifikasi();
+        // Add the first pending promise.
+        $this->addPending();
         // Note this is special handling for concurrency=1 so that we do
         // not advance the iterator after adding the first promise. This
         // helps work around issues with generators that might not have the
         // next value to yield until promise callbacks are called.
         while (--$concurrency
             && $this->advanceIterator()
-            && $this->addDiverifikasi());
+            && $this->addPending());
     }
 
-    private function addDiverifikasi()
+    private function addPending()
     {
         if (!$this->iterable || !$this->iterable->valid()) {
             return false;
         }
 
-        $promise = promise_for($this->iterable->current());
-        $idx = $this->iterable->key();
+        $promise = Create::promiseFor($this->iterable->current());
+        $key = $this->iterable->key();
 
-        $this->Diverifikasi[$idx] = $promise->then(
-            function ($value) use ($idx) {
+        // Iterable keys may not be unique, so we use a counter to
+        // guarantee uniqueness
+        $idx = $this->nextPendingIndex++;
+
+        $this->pending[$idx] = $promise->then(
+            function ($value) use ($idx, $key) {
                 if ($this->onFulfilled) {
                     call_user_func(
-                        $this->onFulfilled, $value, $idx, $this->aggregate
+                        $this->onFulfilled,
+                        $value,
+                        $key,
+                        $this->aggregate
                     );
                 }
                 $this->step($idx);
             },
-            function ($reason) use ($idx) {
+            function ($reason) use ($idx, $key) {
                 if ($this->onRejected) {
                     call_user_func(
-                        $this->onRejected, $reason, $idx, $this->aggregate
+                        $this->onRejected,
+                        $reason,
+                        $key,
+                        $this->aggregate
                     );
                 }
                 $this->step($idx);
@@ -201,24 +219,24 @@ class EachPromise implements PromisorInterface
     private function step($idx)
     {
         // If the promise was already resolved, then ignore this step.
-        if ($this->aggregate->getState() !== PromiseInterface::Diverifikasi) {
+        if (Is::settled($this->aggregate)) {
             return;
         }
 
-        unset($this->Diverifikasi[$idx]);
+        unset($this->pending[$idx]);
 
-        // Only refill Diverifikasi promises if we are not locked, preventing the
+        // Only refill pending promises if we are not locked, preventing the
         // EachPromise to recursively invoke the provided iterator, which
         // cause a fatal error: "Cannot resume an already running generator"
         if ($this->advanceIterator() && !$this->checkIfFinished()) {
-            // Add more Diverifikasi promises if possible.
-            $this->refillDiverifikasi();
+            // Add more pending promises if possible.
+            $this->refillPending();
         }
     }
 
     private function checkIfFinished()
     {
-        if (!$this->Diverifikasi && !$this->iterable->valid()) {
+        if (!$this->pending && !$this->iterable->valid()) {
             // Resolve the promise if there's nothing left to do.
             $this->aggregate->resolve(null);
             return true;

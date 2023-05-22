@@ -1,4 +1,5 @@
 <?php
+
 namespace GuzzleHttp\Promise;
 
 /**
@@ -12,7 +13,7 @@ namespace GuzzleHttp\Promise;
  */
 interface PromiseInterface
 {
-    const Diverifikasi = 'Diverifikasi';
+    const PENDING = 'pending';
     const FULFILLED = 'fulfilled';
     const REJECTED = 'rejected';
 
@@ -43,10 +44,10 @@ interface PromiseInterface
     public function otherwise(callable $onRejected);
 
     /**
-     * Get the state of the promise ("Diverifikasi", "rejected", or "fulfilled").
+     * Get the state of the promise ("pending", "rejected", or "fulfilled").
      *
      * The three states can be checked against the constants defined on
-     * PromiseInterface: Diverifikasi, FULFILLED, and REJECTED.
+     * PromiseInterface: PENDING, FULFILLED, and REJECTED.
      *
      * @return string
      */
@@ -56,6 +57,7 @@ interface PromiseInterface
      * Resolve the promise with the given value.
      *
      * @param mixed $value
+     *
      * @throws \RuntimeException if the promise is already resolved.
      */
     public function resolve($value);
@@ -64,6 +66,7 @@ interface PromiseInterface
      * Reject the promise with the given reason.
      *
      * @param mixed $reason
+     *
      * @throws \RuntimeException if the promise is already resolved.
      */
     public function reject($reason);
@@ -86,6 +89,7 @@ interface PromiseInterface
      * @param bool $unwrap
      *
      * @return mixed
+     *
      * @throws \LogicException if the promise has no wait function or if the
      *                         promise does not settle after waiting.
      */

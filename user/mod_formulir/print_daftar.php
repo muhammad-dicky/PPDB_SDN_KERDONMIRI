@@ -3,6 +3,7 @@ require "../../config/database.php";
 require "../../config/function.php";
 require "../../config/functions.crud.php";
 include "../../assets/modules/phpqrcode/qrlib.php";
+
 session_start();
 if (!isset($_SESSION['id_daftar'])) {
     die('Anda tidak diijinkan mengakses langsung');
@@ -253,7 +254,8 @@ require_once '../../vendor/autoload.php';
 use Dompdf\Dompdf;
 
 $dompdf = new Dompdf();
-$dompdf->loadHtml($html);
+$dompdf->loadHtml($html,'UTF-8');
+
 $dompdf->setPaper('A4', 'portrait');
 $dompdf->render();
 $dompdf->stream("PPDB2021_" . $siswa['nama'] . ".pdf", array("Attachment" => false));

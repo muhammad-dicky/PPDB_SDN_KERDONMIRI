@@ -198,8 +198,8 @@ html {
     transition: all 0.3s
 }
 
-.home-content .card:hover,
-.home-content img:hover {}
+/* .home-content .card:hover,
+.home-content img:hover {} */
 
 .home-content-wrapper .card-login {
     position: sticky;

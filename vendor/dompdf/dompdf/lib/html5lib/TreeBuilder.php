@@ -73,8 +73,8 @@ class HTML5_TreeBuilder {
     'p','param','plaintext','pre','script','select','spacer','style',
     'tbody','textarea','tfoot','thead','title','tr','ul','wbr'];
 
-    private $DiverifikasiTableCharacters;
-    private $DiverifikasiTableCharactersDirty;
+    private $pendingTableCharacters;
+    private $pendingTableCharactersDirty;
 
     // Tree construction modes
     const INITIAL           = 0;
@@ -2045,10 +2045,10 @@ class HTML5_TreeBuilder {
                 /* A character token */
                 if ($token['type'] === HTML5_Tokenizer::CHARACTER ||
                     $token['type'] === HTML5_Tokenizer::SPACECHARACTER) {
-                    /* Let the Diverifikasi table character tokens
+                    /* Let the pending table character tokens
                      * be an empty list of tokens. */
-                    $this->DiverifikasiTableCharacters = "";
-                    $this->DiverifikasiTableCharactersDirty = false;
+                    $this->pendingTableCharacters = "";
+                    $this->pendingTableCharactersDirty = false;
                     /* Let the original insertion mode be the current
                      * insertion mode. */
                     $this->original_mode = $this->mode;
@@ -2205,22 +2205,22 @@ class HTML5_TreeBuilder {
             case self::IN_TABLE_TEXT:
                 /* A character token */
                 if ($token['type'] === HTML5_Tokenizer::CHARACTER) {
-                    /* Append the character token to the Diverifikasi table
+                    /* Append the character token to the pending table
                      * character tokens list. */
-                    $this->DiverifikasiTableCharacters .= $token['data'];
-                    $this->DiverifikasiTableCharactersDirty = true;
+                    $this->pendingTableCharacters .= $token['data'];
+                    $this->pendingTableCharactersDirty = true;
                 } elseif ($token['type'] === HTML5_Tokenizer::SPACECHARACTER) {
-                    $this->DiverifikasiTableCharacters .= $token['data'];
+                    $this->pendingTableCharacters .= $token['data'];
                 /* Anything else */
                 } else {
-                    if ($this->DiverifikasiTableCharacters !== '' && is_string($this->DiverifikasiTableCharacters)) {
-                        /* If any of the tokens in the Diverifikasi table character tokens list
+                    if ($this->pendingTableCharacters !== '' && is_string($this->pendingTableCharacters)) {
+                        /* If any of the tokens in the pending table character tokens list
                          * are character tokens that are not one of U+0009 CHARACTER
                          * TABULATION, U+000A LINE FEED (LF), U+000C FORM FEED (FF), or
                          * U+0020 SPACE, then reprocess those character tokens using the
                          * rules given in the "anything else" entry in the in table"
                          * insertion mode.*/
-                        if ($this->DiverifikasiTableCharactersDirty) {
+                        if ($this->pendingTableCharactersDirty) {
                             /* Parse error. Process the token using the rules for the
                              * "in body" insertion mode, except that if the current
                              * node is a table, tbody, tfoot, thead, or tr element,
@@ -2231,18 +2231,18 @@ class HTML5_TreeBuilder {
                             $this->foster_parent = true;
                             $text_token = [
                                 'type' => HTML5_Tokenizer::CHARACTER,
-                                'data' => $this->DiverifikasiTableCharacters,
+                                'data' => $this->pendingTableCharacters,
                             ];
                             $this->processWithRulesFor($text_token, self::IN_BODY);
                             $this->foster_parent = $old;
 
-                        /* Otherwise, insert the characters given by the Diverifikasi table
+                        /* Otherwise, insert the characters given by the pending table
                          * character tokens list into the current node. */
                         } else {
-                            $this->insertText($this->DiverifikasiTableCharacters);
+                            $this->insertText($this->pendingTableCharacters);
                         }
-                        $this->DiverifikasiTableCharacters = null;
-                        $this->DiverifikasiTableCharactersNull = null;
+                        $this->pendingTableCharacters = null;
+                        $this->pendingTableCharactersNull = null;
                     }
 
                     /* Switch the insertion mode to the original insertion mode and
