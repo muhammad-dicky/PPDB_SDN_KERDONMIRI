@@ -1,16 +1,18 @@
 .main-header .sidebar-baru {
     float: left;
-    color:white;
+    color: white;
     padding: 15px 15px;
-    cursor:pointer;
+    cursor: pointer;
 }
+
 .small-box {
     border-radius: 5px;
     position: relative;
     display: block;
     margin-bottom: 20px;
-    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.3);
+    box-shadow: 2px 2px 5px 0px rgba(0, 0, 0, 0.3);
 }
+
 @font-face {
     font-family: 'tulisan_keren';
     src: url('../fonts/poppins/Poppins-Light.ttf');
@@ -71,9 +73,11 @@ body {
     box-shadow: none;
     border-color: #afc2e8;
 }
+
 .box-header {
     color: rgba(224, 219, 219, 0.877);
 }
+
 .box-header .box-title {
     color: #3d6baf;
 }
@@ -81,7 +85,7 @@ body {
 
 
 thead {
-    background-color:rgb(61, 159, 252);
+    background-color: rgb(61, 159, 252);
 
 }
 
@@ -99,25 +103,29 @@ thead:hover {
     font-size: 30px;
     color: #fff;
 }
+
 .main-header .logo .logo-lg {
     display: block;
     color: black;
 }
+
 .side-menu-icon {
     font-size: 18px;
     color: transparent;
     width: 30px;
     text-align: center;
     -webkit-text-stroke-width: .7px;
-    -webkit-text-stroke-color: #005BEA;
+    -webkit-text-stroke-color: #008080;
 }
+
 .sidebar-menu li.header {
     padding: 5px 25px 5px 15px;
     font-size: 12px;
 }
+
 .menu-header ul {
     list-style: none;
-    background: #005BEA;
+    background: #008080;
     text-align: center;
     padding: 0;
     margin: 0;
@@ -125,9 +133,11 @@ thead:hover {
     left: 0;
     right: 0;
 }
+
 .menu-header ul li {
     display: inline-block;
 }
+
 .menu-header ul li a {
     display: inline-block;
     text-align: center;
@@ -135,20 +145,23 @@ thead:hover {
     color: #fff;
     margin-top: 0;
 }
+
 .skin-green-light .sidebar-menu>li.active>a {
     background-color: transparent;
-    border-color: #005BEA;
+    border-color: #008080;
     color: #000;
-    box-shadow: inset 5px 0 0 #005BEA;
+    box-shadow: inset 5px 0 0 #008080;
 }
+
 .skin-green-light .sidebar-menu>li>a:hover {
     background-color: transparent;
-    border-color: #005BEA;
+    border-color: #008080;
     color: #000;
-    box-shadow: inset 5px 0 0 #005BEA;
+    box-shadow: inset 5px 0 0 #008080;
 }
+
 .sidebar-menu li a {
-    
+
     margin-top: -1px;
     text-decoration: none;
     outline: none;

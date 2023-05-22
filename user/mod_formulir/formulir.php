@@ -269,8 +269,12 @@
                                 <div class="form-group row mb-2">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No Handphone</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>" >
-                                    </div>
+  <div class="d-flex">
+    <input type="text" placeholder="+62" disabled style="width: 35px;">
+    <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>">
+  </div>
+</div>
+
                                 </div>
 
                                 <div class="form-group row mb-2">

@@ -87,9 +87,9 @@
                                     <a class="nav-link" href="#persyaratan" id="link-persyaratan">Info Pendaftaran</a>
                                 </li>
 								
-                                <li class="nav-item">
+                                <!-- <li class="nav-item">
                                     <a class="nav-link" href="./login" id="link-jadwal">Admin</a>
-                                </li>
+                                </li> -->
                                 
                             </ul>
                         </div>
@@ -276,9 +276,17 @@
 												<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" autocomplete="off" required>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="nohp">NO HANDPHONE</label>
-												<input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
-											</div>
+  <label for="nohp">NO HANDPHONE</label>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" placeholder="+62" disabled class="form-control">
+    </div>
+    <div class="col-10">
+      <input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
+    </div>
+  </div>
+</div>
+
 											</div>
 											
 											<div class="form-row">
@@ -353,9 +361,17 @@
 												<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" autocomplete="off" required>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="nohp">NO HANDPHONE</label>
-												<input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
-											</div>
+  <label for="nohp">NO HANDPHONE</label>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" placeholder="+62" disabled style="width:45px" class="form-control">
+    </div>
+    <div class="col-10">
+      <input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
+    </div>
+  </div>
+</div>
+
 											</div>
 											
 											<div class="form-row">
@@ -505,9 +521,17 @@
 												<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" autocomplete="off" disabled>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="nohp">NO HANDPHONE</label>
-												<input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" disabled>
-											</div>
+  <label for="nohp">NO HANDPHONE</label>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" placeholder="+62" disabled class="form-control" style="width:30px">
+    </div>
+    <div class="col-10">
+      <input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
+    </div>
+  </div>
+</div>
+
 											</div>
 											
 											<div class="form-row">

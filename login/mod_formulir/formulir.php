@@ -126,8 +126,16 @@
                                 <div class="form-group row mb-2">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No Handphone</label>
                                     <div class="col-sm-12 col-md-5">
-                                        <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>" required>
-                                    </div>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" placeholder="+62" disabled class="form-control">
+    </div>
+    <div class="col-10">
+      <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>" required>
+    </div>
+  </div>
+</div>
+
                                 </div>
                                 <div class="form-group row mb-2">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Asal Sekolah</label>

@@ -184,17 +184,17 @@ crossorigin="anonymous"></script>
 			
 				<ul>
 					<li>
-						<a style="color:#f2ee07" href="." class="btn-logout">
+						<a style="color:white" href="." class="btn-logout">
 							<span class="fas fa-home "></span><br>Home
 						</a>
 					</li>
 					<li>
-						<a style="color:#f2b707" class="btn-logout" href="?pg=setting">
+						<a style="color:white" class="btn-logout" href="?pg=setting">
 							<span class="fas fa-user-cog "></span><br>Setting
 						</a>
 					</li>
 					<li>
-						<a style="color:#f27907" href="logout.php" class="btn-logout"> <span class="fas fa-sign-out-alt  "></span><br>Keluar</a>
+						<a style="color:white" href="logout.php" class="btn-logout"> <span class="fas fa-sign-out-alt  "></span><br>Keluar</a>
 					</li>
 				</ul>
 			</div>

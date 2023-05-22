@@ -205,8 +205,10 @@
                                 <div class="form-group row mb-2">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">No Handphone</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>" >
-                                    </div>
+  <input type="text" placeholder="+62" disabled style="float: left; width: 35px;">
+  <input type="number" name="nohp" class="form-control" value="<?= $siswa['no_hp'] ?>" style="margin-left: 40px;">
+</div>
+
                                 </div>
 
                                 <div class="form-group row mb-2">

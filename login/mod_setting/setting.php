@@ -206,10 +206,18 @@
 											<label>Text Live Chat</label>
 											<textarea class="form-control" name="livechat"><?= $setting['livechat'] ?></textarea>
 										</div>
-										<div class='form-group'>
-											<label>No WA Live Chat Tanpa Angka 0 (cth: 085.. = 85..)</label>
-											<input type="text" name="nolivechat" class="form-control" value="<?= $setting['nolivechat'] ?>" required>
-										</div>
+										
+										<div class="form-group">
+  <div class="label-wrapper">
+    <label for="nolivechat">No WA Live Chat Tanpa Angka 0 (cth: 085.. = 85..)</label>
+  </div>
+  <div class="input-wrapper d-flex">
+    <input type="text" placeholder="+62" disabled style="width: 60px" class="form-control">
+    <input type="text" name="nolivechat" class="form-control" value="<?= $setting['nolivechat'] ?>" required>
+  </div>
+</div>
+
+
 										
 										
 										

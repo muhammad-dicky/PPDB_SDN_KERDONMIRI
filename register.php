@@ -79,9 +79,16 @@ require "config/functions.crud.php";
 												<input type="text" class="form-control" name="nama" placeholder="Nama Lengkap" autocomplete="off" required>
 											</div>
 											<div class="form-group col-md-6">
-												<label for="nohp">NO HANDPHONE</label>
-												<input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
-											</div>
+  <label for="nohp">NO HANDPHONE</label>
+  <div class="row">
+    <div class="col-2">
+      <input type="text" placeholder="+62" disabled style="width:45px" class="form-control">
+    </div>
+    <div class="col-10">
+      <input type="number" class="form-control" name="nohp" placeholder="No HP Whatsapp" required>
+    </div>
+  </div>
+</div>
 											</div>
 											
 											<div class="form-row">
