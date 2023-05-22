@@ -125,7 +125,7 @@
                                                 Pendaftaran Siswa dan Siswi Baru Tahun 2022 ini telah dibuka. Silahkan Segera Daftar dan lengkapi Formulir
                                             </p>
                                             <p data-animation="animated flipInX" data-delay="3s">
-                                                <a href="/#tentang" class="btn btn-warning nav-link">
+                                                <a href="/#tentang" class="btn nav-link" style="background-color:#004C3F;">
                                                     Lihat Alur Pendaftaran
                                                     <span class="fa fa-chevron-down"></span>
                                                 </a>
@@ -210,7 +210,7 @@
                                            <input type="password" class="form-control" name="password" id="inputPassword4" placeholder="Password">
                                         </div>
                                        
-                                        <button type="submit" class="btn btn-primary btn-block btn-login" style="background-color:black;"id="btnsimpan">
+                                        <button type="submit" class="btn btn-primary btn-block btn-login" style="background-color:#004C3F;"id="btnsimpan">
                                             Masuk
                                         </button>
 										 
@@ -554,44 +554,8 @@
                     </div>
                 </section>
 <?php } ?>
-                <section class="bg-light statistik" id="statistik">
-                    <div class="container">
-                        <h5 class="text-center">Data Pendaftar </h5>
-                        <h6 class="text-center">Peserta Didik Baru <?= $setting['nama_sekolah'] ?> Tahun 2022</h6>
-                        <div class="row mt-12">
-                            <div class="col-sm-6">
-                                <div class="card mt-2">
-                                    <div class="card-header bg-primary">Data Pendaftar</div>
-                                    <div class="card-body">
-                                        <h2 class="text-center"><?= rowcount($koneksi, 'daftar') ?></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            <!--<div class="col-sm-4">
-                                <div class="card mt-2">
-                                    <div class="card-header bg-secondary">Data Siswa</div>
-                                    <div class="card-body">
-                                        <h2 class="text-center"><?= rowcount($koneksi, 'siswa') ?></h2>
-                                    </div>
-                                </div>
-                            </div>-->
-                            <div class="col-sm-6">
-                                <div class="card mt-2">
-                                    <div class="card-header bg-success">Quota Pendaftar</div>
-                                    <div class="card-body">
-                                        <h2 class="text-center"><?php $kuota = mysqli_fetch_array(mysqli_query($koneksi, "select *, sum(kuota) as kuota from jurusan"));
-                    echo $kuota['kuota']; ?></h2>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
 
-                       
-                       
-                    </div>
-                </section>
-                 <section class="bg-light statistik" id="persyaratan">
+<section class="bg-light statistik" id="persyaratan">
                     <div class="container">
                         <h5 class="text-center">Info Pendaftaran </h5>
                         <h6 class="text-center">Peserta Didik Baru <?= $setting['nama_sekolah'] ?> Tahun 2022</h6>
@@ -684,6 +648,45 @@
                         </div>
                     </div>
                 </section>
+
+                <section class="bg-light statistik" id="statistik">
+                    <div class="container">
+                        <h5 class="text-center">Data Pendaftar </h5>
+                        <h6 class="text-center">Peserta Didik Baru <?= $setting['nama_sekolah'] ?> Tahun 2022</h6>
+                        <div class="row mt-12">
+                            <div class="col-sm-6">
+                                <div class="card mt-2">
+                                    <div class="card-header bg-primary">Data Pendaftar</div>
+                                    <div class="card-body">
+                                        <h2 class="text-center"><?= rowcount($koneksi, 'daftar') ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="col-sm-4">
+                                <div class="card mt-2">
+                                    <div class="card-header bg-secondary">Data Siswa</div>
+                                    <div class="card-body">
+                                        <h2 class="text-center"><?= rowcount($koneksi, 'siswa') ?></h2>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-sm-6">
+                                <div class="card mt-2">
+                                    <div class="card-header bg-success">Quota Pendaftar</div>
+                                    <div class="card-body">
+                                        <h2 class="text-center"><?php $kuota = mysqli_fetch_array(mysqli_query($koneksi, "select *, sum(kuota) as kuota from jurusan"));
+                    echo $kuota['kuota']; ?></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                       
+                       
+                    </div>
+                </section>
+                
 				
 				
 				
