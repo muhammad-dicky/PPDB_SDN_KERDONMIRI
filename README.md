@@ -63,7 +63,7 @@ Catatan: Pastikan memperhatikan keamanan aplikasi dengan menggunakan password ya
 
 BUG
 ---------
-- gambar di hasil print pdf ga tampil
+- gambar di hasil print pdf ga tampil (src ga kedetect)
 
 - ~library dompdf (untuk download html to pdf) masih error, jika tidak ditemukan jalan keluar maka bikin tombolnya jadi fungsi ctrl+p~
 SOLVE - Gunakan PHP 7.1
