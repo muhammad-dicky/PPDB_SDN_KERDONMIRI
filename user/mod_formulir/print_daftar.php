@@ -38,7 +38,7 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
     <body>
         
         <hr>
-		<b><center>Formulir Pendaftaran Peserta Didik Baru Tahun 2022</center></b>
+		<b><center>Formulir Pendaftaran Peserta Didik Baru Tahun 2023</center></b>
 		<br>
 			
 			<table width="100%" style="font-size: 13px" cellpadding="1" cellspacing="0" style="border-bottom:1px solid #a5a5a5;">
@@ -63,12 +63,7 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
 				
 			</tr>
 			
-			<tr>
-				<td></td>
-				<td align="">Jalur Pendaftaran</td>
-				<td align="center">:</td>
-				<td align="left">umum</td>
-			</tr>
+			
 			<tr>
 				<td></td>
 				<td align="">Nomor Pendaftaran</td>
@@ -78,7 +73,7 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
 		
 			<tr>
 				<td></td>
-				<td align="">Jurusan</td>
+				<td align="">Jalur Pendaftaran</td>
 				<td align="center">:</td>
 				<td align="left"><?= $siswa['jurusan'] ?></td>
 			</tr>

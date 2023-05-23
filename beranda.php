@@ -698,9 +698,18 @@
                                 <div class="card mt-2">
                                     <div class="card-header bg-success">Quota Pendaftar</div>
                                     <div class="card-body">
-                                        <h2 class="text-center"><?php $kuota = mysqli_fetch_array(mysqli_query($koneksi, "select *, sum(kuota) as kuota from jurusan"));
-                    echo $kuota['kuota']; ?></h2>
-                                    </div>
+    <h2 class="text-center">
+        <?php
+        $query = mysqli_query($koneksi, "SELECT SUM(kuota) AS kuota FROM jurusan");
+        if ($query) {
+            $kuota = mysqli_fetch_array($query);
+            echo $kuota['kuota'];
+        } else {
+            echo "Error: " . mysqli_error($koneksi);
+        }
+        ?>
+    </h2>
+</div>
                                 </div>
                             </div>
                             
@@ -715,61 +724,60 @@
 				
 				
 				
-				<section class="bg-light statistik" id="statistik">
-                    <div class="container">
-                        
-                        <div class="row mt-12">
-                            <div class="col-sm-12">
-                               <div class="card">
-								<div class="card-header text-white" style="background-color: #005f6b">
-								   <h4>Data Statistik Asal Sekolah Pendaftar</h4>
-									<div class="card-header-action">
-
-									</div>
-								</div>
-								<div class="card-body text-black" style="background-color: #fff">
-									<div class="table-responsive">
-										<table class="table table-striped table-sm" id="sortable-table">
-											<thead>
-												<tr>
-													<th class="text-center">
-												 
-													</th>
-													<th>NPSN</th>
-													<th>NAMA SEKOLAH</th>
-													<th class="text-center">PENDAFTAR</th>
-												</tr>
-											</thead>
-											<tbody class="ui-sortable">
-												<?php $query = mysqli_query($koneksi, "select * from daftar group by asal_sekolah");
-												while ($sekolah = mysqli_fetch_array($query)) {
-													$hitung = rowcount($koneksi, 'daftar', ['asal_sekolah' => $sekolah['asal_sekolah']]);
-												?>
-													<tr>
-														<td>
-															<div class="sort-handler ui-sortable-handle">
-																<i class="fas fa-th"></i>
-															</div>
-														</td>
-														<td><?= $sekolah['npsn_asal'] ?></td>
-														<td><?= $sekolah['asal_sekolah'] ?></td>
-
-														<td class="text-center">
-															<div class="badge badge-success"><?= $hitung ?></div>
-														</td>
-													</tr>
-												<?php } ?>
-											</tbody>
-										</table>
-									</div>
-								</div>
-								 </div> 
-								
-								
-                            </div>
+                <section class="bg-light statistik" id="statistik">
+    <div class="container">
+        <div class="row mt-12">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header text-white" style="background-color: #005f6b">
+                        <h4>Data Statistik Asal Sekolah Pendaftar</h4>
+                        <div class="card-header-action"></div>
+                    </div>
+                    <div class="card-body text-black" style="background-color: #fff">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm" id="sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center"></th>
+                                        <th>NPSN</th>
+                                        <th>NAMA SEKOLAH</th>
+                                        <th class="text-center">PENDAFTAR</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="ui-sortable">
+                                    <?php
+                                    $query = mysqli_query($koneksi, "SELECT npsn_asal, asal_sekolah, COUNT(*) AS total_pendaftar FROM daftar GROUP BY npsn_asal, asal_sekolah");
+                                    if ($query) {
+                                        while ($sekolah = mysqli_fetch_array($query)) {
+                                    ?>
+                                            <tr>
+                                                <td>
+                                                    <div class="sort-handler ui-sortable-handle">
+                                                        <i class="fas fa-th"></i>
+                                                    </div>
+                                                </td>
+                                                <td><?= $sekolah['npsn_asal'] ?></td>
+                                                <td><?= $sekolah['asal_sekolah'] ?></td>
+                                                <td class="text-center">
+                                                    <div class="badge badge-success"><?= $sekolah['total_pendaftar'] ?></div>
+                                                </td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo "Error: " . mysqli_error($koneksi);
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 
 
 				
