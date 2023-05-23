@@ -64,5 +64,5 @@ Catatan: Pastikan memperhatikan keamanan aplikasi dengan menggunakan password ya
 BUG
 ---------
 ~library dompdf (untuk download html to pdf) masih error, jika tidak ditemukan jalan keluar maka bikin tombolnya jadi fungsi ctrl+p~
-SOLVE
+SOLVE - Gunakan PHP 7.1
 
