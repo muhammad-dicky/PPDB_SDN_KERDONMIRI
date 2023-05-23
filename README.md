@@ -59,3 +59,9 @@ Dengan fitur-fitur tersebut, aplikasi PPDB SD N Kerd
 onmiri 2 memudahkan proses pendaftaran dan pengelolaan data peserta didik baru secara efisien dan terorganisir.
 
 Catatan: Pastikan memperhatikan keamanan aplikasi dengan menggunakan password yang kuat dan melakukan langkah-langkah keamanan yang diperlukan untuk melindungi data sensitif.
+
+
+BUG
+---------
+library dompdf (untuk download html to pdf) masih error, jika tidak ditemukan jalan keluar maka bikin tombolnya jadi fungsi ctrl+p
+
