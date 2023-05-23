@@ -20,13 +20,6 @@ use Dompdf\Image\Cache;
 use Dompdf\PhpEvaluator;
 use FontLib\Exception\FontNotFoundException;
 
-use Dompdf\Adapter\CPDF;
-use Dompdf\CanvasFactory;
-
-$dompdf = new Dompdf();
-$canvas = CanvasFactory::get_instance($dompdf, 'letter', 'portrait', CPDF::class);
-
-
 /**
  * PDF rendering interface
  *
@@ -187,7 +180,7 @@ class CPDF implements Canvas
      * @param string $orientation The orientation of the document (either 'landscape' or 'portrait')
      * @param Dompdf $dompdf The Dompdf instance
      */
-    public function __construct(Dompdf $dompdf, $paper = "letter", $orientation = "portrait")
+    public function __construct($paper = "letter", $orientation = "portrait", Dompdf $dompdf)
     {
         if (is_array($paper)) {
             $size = $paper;

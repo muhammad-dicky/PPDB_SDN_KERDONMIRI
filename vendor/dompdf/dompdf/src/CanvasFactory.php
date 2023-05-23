@@ -6,17 +6,6 @@
  * @license http://www.gnu.org/copyleft/lesser.html GNU Lesser General Public License
  */
 namespace Dompdf;
-namespace Dompdf\Adapter;
-
-use Dompdf\Canvas;
-use Dompdf\Dompdf;
-use Dompdf\Helpers;
-use Dompdf\Exception;
-use Dompdf\Image\Cache;
-use Dompdf\PhpEvaluator;
-use FontLib\Exception\FontNotFoundException;
-
-use Dompdf\Adapter\CPDF;
 
 /**
  * Create canvas instances

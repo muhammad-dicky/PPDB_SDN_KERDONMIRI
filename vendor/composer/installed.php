@@ -3,7 +3,7 @@
         'name' => 'dapit/belajar',
         'pretty_version' => 'dev-master',
         'version' => 'dev-master',
-        'reference' => 'd4f73093bcb7fa9ca514b292db84ac48a03d54fc',
+        'reference' => 'de272e1c70f6e056d482526e346cde0456b5bf0d',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'dapit/belajar' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'd4f73093bcb7fa9ca514b292db84ac48a03d54fc',
+            'reference' => 'de272e1c70f6e056d482526e346cde0456b5bf0d',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

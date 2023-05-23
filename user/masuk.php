@@ -95,7 +95,7 @@
 				</form>	
 			</div>
 			<div align="right">
-				copyright &copy; Alfakir Nasrulloh
+				copyright &copy;  
 			</div>
 		</div>
 		<div class="col-lg-1">

@@ -24,7 +24,7 @@ namespace Dompdf;
  */
 interface Canvas
 {
-    function __construct(Dompdf $dompdf, $paper = "letter", $orientation = "portrait" );
+    function __construct($paper = "letter", $orientation = "portrait", Dompdf $dompdf);
 
     /**
      * @return Dompdf

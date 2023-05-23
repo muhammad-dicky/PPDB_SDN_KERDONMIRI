@@ -21,15 +21,6 @@ use Dompdf\Renderer\ListBullet;
 use Dompdf\Css\Stylesheet;
 use Dompdf\Helpers;
 
-
-use Dompdf\Canvas;
-use Dompdf\Dompdf;
-use Dompdf\Exception;
-use Dompdf\PhpEvaluator;
-use FontLib\Exception\FontNotFoundException;
-
-use Dompdf\CanvasFactory;
-
 /**
  * Dompdf - PHP5 HTML to PDF renderer
  *
