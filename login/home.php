@@ -12,18 +12,24 @@
 									<a href="?pg=daftar" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
-							<div class="col-lg-3 ">
-								<div class="small-box bg-yellow">
-									<div class="inner">
-										<h3><?= mysqli_num_rows(mysqli_query($koneksi, 'select * from daftar group by asal_sekolah')) ?></h3>
-										<p>Data Sekolah</p>
-									</div>
-									<div class="icon">
-										<i class="fa fa-edit"></i>
-									</div>
-									<a href="?pg=daftar" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-								</div>
-							</div>
+							<div class="col-lg-3">
+	<div class="small-box bg-yellow">
+		<div class="inner">
+			<?php
+			$query = mysqli_query($koneksi, 'SELECT COUNT(DISTINCT asal_sekolah) AS total_sekolah FROM daftar');
+			$result = mysqli_fetch_assoc($query);
+			$total_sekolah = $result['total_sekolah'];
+			?>
+			<h3><?= $total_sekolah ?></h3>
+			<p>Data Sekolah</p>
+		</div>
+		<div class="icon">
+			<i class="fa fa-edit"></i>
+		</div>
+		<a href="?pg=daftar" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+	</div>
+</div>
+
 							<div class="col-lg-3">
 								<div class="small-box bg-red">
 									<div class="inner">
@@ -36,19 +42,30 @@
 									<a href="?pg=jurusan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
 								</div>
 							</div>
+                            
 							<div class="col-lg-3">
-								<div class="small-box bg-green">
-									<div class="inner">
-										<h3> <?php $kuota = mysqli_fetch_array(mysqli_query($koneksi, "select *, sum(kuota) as kuota from jurusan"));
-                    echo $kuota['kuota']; ?></h3>
-										<p>Jumlah Kuota</p>
-									</div>
-									<div class="icon">
-										<i class="fa fa-school"></i>
-									</div>
-									<a href="?pg=jurusan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-								</div>
-							</div>
+	<div class="small-box bg-green">
+		<div class="inner">
+			<?php
+			$query = mysqli_query($koneksi, "SELECT SUM(kuota) AS total_kuota FROM jurusan");
+			if ($query) {
+				$result = mysqli_fetch_assoc($query);
+				$total_kuota = $result['total_kuota'];
+				echo "<h3>$total_kuota</h3>";
+			} else {
+				echo "Error: " . mysqli_error($koneksi);
+			}
+			?>
+			<p>Jumlah Kuota</p>
+		</div>
+		<div class="icon">
+			<i class="fa fa-school"></i>
+		</div>
+		<a href="?pg=jurusan" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+	</div>
+</div>
+
+                            
 							</div>
 					<div style='float:right; margin-top:-220px'>
 					<button class='btn  btn-flat  bg-purple'><i class='fa fa-calendar'></i> <?= buat_tanggal('D, d M Y') ?></button>
