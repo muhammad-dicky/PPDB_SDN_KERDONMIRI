@@ -32,7 +32,7 @@ $siswa = fetch($koneksi, 'daftar', ['id_daftar' => dekripsi($_GET['id'])]);
 	<head>
 		<title>Surat Pernyataan<?= $siswa['nama'] ?></title>
 	</head>
-	<body>
+	<body onload="window.print();">
 		<img src="../../assets/img/kop/kop.png" width="100%" />
     <body>
     
@@ -100,18 +100,21 @@ $siswa = fetch($koneksi, 'daftar', ['id_daftar' => dekripsi($_GET['id'])]);
 </body>
 
 </html>
+<script>
+	window.print();
+</script>
 <?php
 
-$html = ob_get_clean();
-require_once '../../vendor/autoload.php';
+// $html = ob_get_clean();
+// require_once '../../vendor/autoload.php';
 
-use Dompdf\Dompdf;
+// use Dompdf\Dompdf;
 
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html,'UTF-8');
+// $dompdf = new Dompdf();
+// $dompdf->loadHtml($html,'UTF-8');
 
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream("surat_pernyataan.pdf", array("Attachment" => false));
-exit(0);
+// $dompdf->setPaper('A4', 'portrait');
+// $dompdf->render();
+// $dompdf->stream("surat_pernyataan.pdf", array("Attachment" => false));
+// exit(0);
 ?>

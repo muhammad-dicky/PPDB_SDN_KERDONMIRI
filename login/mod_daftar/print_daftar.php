@@ -32,7 +32,7 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
 	<head>
 		<title>Formulir_PPDB<?= $siswa['nama'] ?></title>
 	</head>
-	<body>
+	<body onload="window.print();">
 		<img src="../../<?= $setting['kop'] ?>" width="100%" />
     <body>
         
@@ -243,20 +243,22 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
 </body>
 
 </html>
-
+<script>
+	windw.print();
+</script>
 
 <?php
 
-$html = ob_get_clean();
-require_once '../../vendor/autoload.php';
+// $html = ob_get_clean();
+// require_once '../../vendor/autoload.php';
 
-use Dompdf\Dompdf;
+// use Dompdf\Dompdf;
 
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html, 'UTF-8');
+// $dompdf = new Dompdf();
+// $dompdf->loadHtml($html, 'UTF-8');
 
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream("PPDB2021_" . $siswa['nama'] . ".pdf", array("Attachment" => false));
-exit(0);
+// $dompdf->setPaper('A4', 'portrait');
+// $dompdf->render();
+// $dompdf->stream("PPDB2021_" . $siswa['nama'] . ".pdf", array("Attachment" => false));
+// exit(0);
 ?>

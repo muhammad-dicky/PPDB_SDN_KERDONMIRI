@@ -35,7 +35,7 @@ QRcode::png($codeContents, $tempdir . $id_bayar . '.png', QR_ECLEVEL_L, 3, 6);
 
 </head>
 
-<body>
+<body onload="window.print()">
     <h3><?= $setting['nama_sekolah'] ?></h3>
     <p><small> <?= $setting['alamat'] ?></small></p>
     <hr>
@@ -73,18 +73,22 @@ QRcode::png($codeContents, $tempdir . $id_bayar . '.png', QR_ECLEVEL_L, 3, 6);
 </body>
 
 </html>
+
+<script>
+    window.print();
+</script>
 <?php
 
-$html = ob_get_clean();
-require_once '../../vendor/autoload.php';
+// $html = ob_get_clean();
+// require_once '../../vendor/autoload.php';
 
-use Dompdf\Dompdf;
+// use Dompdf\Dompdf;
 
-$dompdf = new Dompdf();
-$dompdf->loadHtml($html, 'UTF-8');
-$dompdf->setPaper('A4', 'portrait');
-$dompdf->render();
-$dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
+// $dompdf = new Dompdf();
+// $dompdf->loadHtml($html, 'UTF-8');
+// $dompdf->setPaper('A4', 'portrait');
+// $dompdf->render();
+// $dompdf->stream("dompdf_out.pdf", array("Attachment" => false));
 
-exit(0);
+// exit(0);
 ?>
