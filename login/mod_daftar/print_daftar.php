@@ -216,7 +216,7 @@ QRcode::png($codeContents, $tempdir . $siswa['nisn'] . '.png', QR_ECLEVEL_M, 4);
 				<td><td><td><td><td><td>
 				
                 <td style="text-align: left">
-                    <font size="13px">
+                    <font size="5px">
                        
                         <?= $setting['kec'] ?>, <?= date('d-M-Y ') ?>
                         <p>Pendaftar</p>
