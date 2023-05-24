@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 03:45 PM
--- Server version: 10.4.27-MariaDB
--- PHP Version: 8.0.25
+-- Host: localhost
+-- Generation Time: May 24, 2023 at 11:26 PM
+-- Server version: 8.0.30
+-- PHP Version: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,15 +29,22 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bayar` (
   `id_bayar` varchar(20) NOT NULL,
-  `id_user` int(10) NOT NULL,
-  `id_daftar` int(10) NOT NULL,
-  `jumlah` int(10) NOT NULL,
+  `id_user` int NOT NULL,
+  `id_daftar` int NOT NULL,
+  `jumlah` int NOT NULL,
   `tgl_bayar` date NOT NULL,
-  `keterangan` int(10) DEFAULT NULL,
+  `keterangan` int DEFAULT NULL,
   `bukti` varchar(50) DEFAULT NULL,
-  `verifikasi` int(1) NOT NULL DEFAULT 0,
-  `hapus` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `verifikasi` int NOT NULL DEFAULT '0',
+  `hapus` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `bayar`
+--
+
+INSERT INTO `bayar` (`id_bayar`, `id_user`, `id_daftar`, `jumlah`, `tgl_bayar`, `keterangan`, `bukti`, `verifikasi`, `hapus`) VALUES
+('202305250001', 0, 301, 150000, '2023-05-25', NULL, 'bukti_transaksi/bukti_202305250001.png', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -48,9 +55,9 @@ CREATE TABLE `bayar` (
 CREATE TABLE `biaya` (
   `id_biaya` varchar(50) NOT NULL,
   `nama_biaya` varchar(200) NOT NULL,
-  `jumlah` int(10) NOT NULL,
+  `jumlah` int NOT NULL,
   `status` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `biaya`
@@ -66,10 +73,10 @@ INSERT INTO `biaya` (`id_biaya`, `nama_biaya`, `jumlah`, `status`) VALUES
 --
 
 CREATE TABLE `daftar` (
-  `id_daftar` int(11) NOT NULL,
+  `id_daftar` int NOT NULL,
   `no_daftar` varchar(20) DEFAULT NULL,
-  `id_siswa` int(11) NOT NULL,
-  `jenis` int(1) DEFAULT NULL,
+  `id_siswa` int NOT NULL,
+  `jenis` int DEFAULT NULL,
   `nis` varchar(30) DEFAULT NULL,
   `nik` varchar(30) DEFAULT NULL,
   `no_kk` varchar(30) DEFAULT NULL,
@@ -87,7 +94,7 @@ CREATE TABLE `daftar` (
   `jenjang` varchar(11) DEFAULT NULL,
   `agama` varchar(50) DEFAULT NULL,
   `status_tinggal` varchar(100) DEFAULT NULL,
-  `alamat` text DEFAULT NULL,
+  `alamat` text,
   `rt` varchar(5) DEFAULT NULL,
   `rw` varchar(5) DEFAULT NULL,
   `desa` varchar(128) DEFAULT NULL,
@@ -99,11 +106,11 @@ CREATE TABLE `daftar` (
   `transportasi` varchar(128) DEFAULT NULL,
   `no_hp` varchar(16) DEFAULT NULL,
   `email` varchar(128) DEFAULT NULL,
-  `anak_ke` int(2) DEFAULT NULL,
-  `saudara` int(11) DEFAULT NULL,
+  `anak_ke` int DEFAULT NULL,
+  `saudara` int DEFAULT NULL,
   `biaya_sekolah` varchar(100) DEFAULT NULL,
-  `paud` text DEFAULT NULL,
-  `tk` text DEFAULT NULL,
+  `paud` text,
+  `tk` text,
   `hepatitis` varchar(10) DEFAULT NULL,
   `polio` varchar(10) DEFAULT NULL,
   `bcg` varchar(10) DEFAULT NULL,
@@ -147,7 +154,7 @@ CREATE TABLE `daftar` (
   `no_ujian` varchar(128) DEFAULT NULL,
   `no_kip` varchar(30) DEFAULT NULL,
   `kip` varchar(256) DEFAULT NULL,
-  `kk` text DEFAULT NULL,
+  `kk` text,
   `kepala_keluarga` varchar(100) DEFAULT NULL,
   `ijazah` varchar(256) DEFAULT NULL,
   `akta` varchar(256) DEFAULT NULL,
@@ -156,16 +163,16 @@ CREATE TABLE `daftar` (
   `alasan_keluar` varchar(100) DEFAULT NULL,
   `surat_keluar` varchar(255) DEFAULT NULL,
   `level` varchar(10) DEFAULT NULL,
-  `aktif` int(1) DEFAULT 0,
-  `status` int(1) DEFAULT 0,
+  `aktif` int DEFAULT '0',
+  `status` int DEFAULT '0',
   `sekolah_tujuan` varchar(10) DEFAULT NULL,
   `npsn_sekolah_tujuan` varchar(10) DEFAULT NULL,
   `tgl_daftar` date DEFAULT NULL,
   `tgl_konfirmasi` date DEFAULT NULL,
-  `konfirmasi` int(1) DEFAULT NULL,
+  `konfirmasi` int DEFAULT NULL,
   `bayar` varchar(100) DEFAULT NULL,
-  `online` int(1) DEFAULT 0,
-  `password` text DEFAULT NULL,
+  `online` int DEFAULT '0',
+  `password` text,
   `bin1` varchar(10) DEFAULT NULL,
   `mat1` varchar(10) DEFAULT NULL,
   `ipa1` varchar(10) DEFAULT NULL,
@@ -187,7 +194,7 @@ CREATE TABLE `daftar` (
   `ipa5` varchar(10) DEFAULT NULL,
   `big5` varchar(10) DEFAULT NULL,
   `jumlah` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `daftar`
@@ -199,7 +206,7 @@ INSERT INTO `daftar` (`id_daftar`, `no_daftar`, `id_siswa`, `jenis`, `nis`, `nik
 (296, 'PPDB2021003', 0, 1, NULL, NULL, NULL, '1234', '1234', '', 'default.png', NULL, '1234', '2021-12-23', '', '', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '1234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, NULL, NULL, NULL, NULL, NULL, 1, '1234', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (299, 'PPDB2023006', 0, 1, NULL, NULL, NULL, '222222', 'TEST NAMA LENGKAP', NULL, 'default.png', NULL, 'Tempat Lahir', '2023-05-07', '', '', NULL, 'BOARDING SCHOOL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '08121235235', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 2, NULL, NULL, NULL, NULL, NULL, NULL, 1, '12345', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (300, 'PPDB2023007', 0, 2, NULL, NULL, NULL, '123321', '123321', NULL, 'default.png', NULL, NULL, NULL, 'MTsN 1 WONOGIRI', '69977331', NULL, 'BOARDING SCHOOL', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '-', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, '123321', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(301, 'PPDB2023008', 0, 1, NULL, '', '', '12345123', 'Test Nama', '', 'assets/upload/foto_siswa/siswa989.png', '', 'Test Tempat Lahir', '2023-05-22', '', '', NULL, 'JALUR ZONASI', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '082145552918', '', 0, 0, '', '', NULL, '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, 'assets/upload/kk/kk649.png', '', NULL, 'assets/upload/akta/akta340.png', NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, NULL, NULL, NULL, NULL, NULL, 1, '12345123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(301, 'PPDB2023008', 0, 1, NULL, '', '', '12345123', 'TEST NAMA', '', 'assets/upload/foto_siswa/siswa989.png', '', 'Test Tempat Lahir', '2023-05-22', '', '', NULL, 'JALUR ZONASI', NULL, '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '082145552918', '', 0, 0, '', '', NULL, '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', 'assets/upload/kip/kip571.png', 'assets/upload/kk/kk296.png', '', 'assets/upload/ijazah/ijazah604.png', 'assets/upload/akta/akta524.png', NULL, NULL, NULL, NULL, NULL, 0, 1, NULL, NULL, NULL, '2023-05-25', 1, NULL, 1, '12345123', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -208,13 +215,13 @@ INSERT INTO `daftar` (`id_daftar`, `no_daftar`, `id_siswa`, `jenis`, `nis`, `nik
 --
 
 CREATE TABLE `histori` (
-  `id` int(11) NOT NULL,
+  `id` int NOT NULL,
   `id_permohonan` varchar(30) NOT NULL,
-  `nik` int(30) NOT NULL,
-  `status` int(1) NOT NULL,
-  `tanggal` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `nik` int NOT NULL,
+  `status` int NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `keterangan` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -225,8 +232,8 @@ CREATE TABLE `histori` (
 CREATE TABLE `jenis` (
   `id_jenis` varchar(50) NOT NULL,
   `nama_jenis` varchar(50) NOT NULL,
-  `status` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `status` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jenis`
@@ -246,9 +253,9 @@ INSERT INTO `jenis` (`id_jenis`, `nama_jenis`, `status`) VALUES
 CREATE TABLE `jenjang` (
   `id_jenjang` varchar(5) NOT NULL,
   `nama_jenjang` varchar(50) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL,
-  `wali` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `status` int DEFAULT NULL,
+  `wali` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -259,9 +266,9 @@ CREATE TABLE `jenjang` (
 CREATE TABLE `jurusan` (
   `id_jurusan` varchar(50) NOT NULL,
   `nama_jurusan` varchar(100) DEFAULT NULL,
-  `kuota` int(10) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `kuota` int DEFAULT NULL,
+  `status` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `jurusan`
@@ -281,9 +288,9 @@ INSERT INTO `jurusan` (`id_jurusan`, `nama_jurusan`, `kuota`, `status`) VALUES
 CREATE TABLE `kelas` (
   `id_kelas` varchar(50) NOT NULL,
   `nama_kelas` varchar(100) DEFAULT NULL,
-  `kuota` int(10) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `kuota` int DEFAULT NULL,
+  `status` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kelas`
@@ -301,11 +308,11 @@ INSERT INTO `kelas` (`id_kelas`, `nama_kelas`, `kuota`, `status`) VALUES
 --
 
 CREATE TABLE `kontak` (
-  `id_kontak` int(11) NOT NULL,
+  `id_kontak` int NOT NULL,
   `nama_kontak` varchar(50) DEFAULT NULL,
   `no_kontak` varchar(50) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `status` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `kontak`
@@ -322,22 +329,21 @@ INSERT INTO `kontak` (`id_kontak`, `nama_kontak`, `no_kontak`, `status`) VALUES
 --
 
 CREATE TABLE `pengumuman` (
-  `id_pengumuman` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_pengumuman` int NOT NULL,
+  `id_user` int NOT NULL,
   `judul` varchar(255) DEFAULT NULL,
-  `pengumuman` text DEFAULT NULL,
-  `tgl` datetime NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `jenis` int(1) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `pengumuman` text,
+  `tgl` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `jenis` int DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengumuman`
 --
 
 INSERT INTO `pengumuman` (`id_pengumuman`, `id_user`, `judul`, `pengumuman`, `tgl`, `jenis`) VALUES
-(2, 5, 'Info Aplikasi', '<p>Aplikasi PPDB Online 2023</p>', '2023-05-21 01:28:07', 1),
-(3, 5, 'Info PPDB Online 2023', '<p><b>Gelombang Pertama</b> Tanggal 1 Desember 2023 Sampai 30 Mei 2023 <b>Gelombang Kedua </b>Tanggal 1 Juni Sampai Tanggal 30 Juni 2023</p><p>Note: Pendaftaran Gelombang Pertama Gratis Biaya Pendaftaran dan Biaya Daftar Ulang</p>', '2023-05-21 06:30:10', 2),
-(4, 5, 'test pengumuman', '<p>tet pengumuman nnnnn</p>', '2023-05-21 06:29:52', 2);
+(2, 5, 'Info Aplikasi', '<p style=\"color: rgb(108, 117, 125);\"><span style=\"font-weight: bolder;\">Gelombang Pertama</span>&nbsp;Tanggal 1 Desember 2023 Sampai 30 Mei 2023&nbsp;<span style=\"font-weight: bolder;\">Gelombang Kedua&nbsp;</span>Tanggal 1 Juni Sampai Tanggal 30 Juni 2023</p><p style=\"color: rgb(108, 117, 125);\">Note: Pendaftaran Gelombang Pertama Gratis Biaya Pendaftaran dan Biaya Daftar Ulang</p><p style=\"color: rgb(108, 117, 125);\"><br></p>', '2023-05-24 05:58:08', 1),
+(3, 5, 'Info PPDB Online 2023', '<p><b>Gelombang Pertama</b> Tanggal 1 Desember 2023 Sampai 30 Mei 2023 <b>Gelombang Kedua </b>Tanggal 1 Juni Sampai Tanggal 30 Juni 2023</p><p>Note: Pendaftaran Gelombang Pertama Gratis Biaya Pendaftaran dan Biaya Daftar Ulang</p>', '2023-05-21 06:30:10', 2);
 
 -- --------------------------------------------------------
 
@@ -349,8 +355,8 @@ CREATE TABLE `sekolah` (
   `npsn` varchar(16) NOT NULL,
   `nama_sekolah` varchar(50) DEFAULT NULL,
   `alamat` varchar(50) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `status` int DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sekolah`
@@ -367,9 +373,9 @@ INSERT INTO `sekolah` (`npsn`, `nama_sekolah`, `alamat`, `status`) VALUES
 --
 
 CREATE TABLE `setting` (
-  `id_setting` int(1) NOT NULL,
+  `id_setting` int NOT NULL,
   `nama_sekolah` varchar(100) NOT NULL,
-  `jenjang` int(11) NOT NULL,
+  `jenjang` int NOT NULL,
   `nsm` varchar(30) NOT NULL,
   `npsn` varchar(30) DEFAULT NULL,
   `status` text NOT NULL,
@@ -380,29 +386,29 @@ CREATE TABLE `setting` (
   `favicon` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `no_telp` varchar(50) DEFAULT NULL,
-  `klikchat` text DEFAULT NULL,
-  `livechat` text DEFAULT NULL,
+  `klikchat` text,
+  `livechat` text,
   `nolivechat` varchar(50) DEFAULT NULL,
-  `infobayar` text DEFAULT NULL,
-  `syarat` text DEFAULT NULL,
+  `infobayar` text,
+  `syarat` text,
   `kab` text NOT NULL,
   `kec` text NOT NULL,
   `web` text NOT NULL,
   `kepala` text NOT NULL,
   `nip` text NOT NULL,
-  `ppdb` text DEFAULT NULL,
+  `ppdb` text,
   `kop` varchar(50) NOT NULL,
   `logo_ppdb` varchar(100) NOT NULL,
   `tgl_pengumuman` date NOT NULL,
   `tgl_tutup` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `setting`
 --
 
 INSERT INTO `setting` (`id_setting`, `nama_sekolah`, `jenjang`, `nsm`, `npsn`, `status`, `alamat`, `kota`, `provinsi`, `logo`, `favicon`, `email`, `no_telp`, `klikchat`, `livechat`, `nolivechat`, `infobayar`, `syarat`, `kab`, `kec`, `web`, `kepala`, `nip`, `ppdb`, `kop`, `logo_ppdb`, `tgl_pengumuman`, `tgl_tutup`) VALUES
-(1, ' SDN KERDONMIRI II RONGKOP', 3, '-', '20402448', 'Negeri', 'Karangwetan, Semugih, Rongkop, Kec. Rongkop, Kab.Gunung Kidul, Prov. D.I. Yogyakarta, 55883', 'Wonogiri', 'D.I. Yogyakarta', 'assets/img/logo/logo228.png', NULL, 'sdkerdonmiri2@gmail.com', '-', 'Assalamu Alaikum\r\n\r\nMohon informasi PPDB', 'Assalamu Alaikum\r\n\r\nMohon informasi PPDB', '82226246960', '<p>Pembayaran Pendaftaran bisa di transfer melalui :<br>BRI - 12353435 - SDN Kerdonmiri</p><p>BCA - 123513 - SDN Kerdonmiri</p>', '<p><br></p><ol><li>Surat Keterangan Lulus</li><li>Akta Kelahiran</li><li>Kartu Keluarga</li></ol>', ' Kab.Gunung Kidul', ' Kec. Rongkop', 'https://sdkerdonmiri2rongkop.pendidikan.gunungkidulkab.go.id/', 'Widodo', '-', '1', 'assets/img/kop/kop864.png', 'assets/img/logo/logo_ppdb237.png', '2023-05-08', '2021-05-20');
+(1, ' SDN KERDONMIRI II RONGKOP', 3, '-', '20402448', 'Negeri', 'Karangwetan, Semugih, Rongkop, Kec. Rongkop, Kab.Gunung Kidul, Prov. D.I. Yogyakarta, 55883', 'Wonogiri', 'D.I. Yogyakarta', 'assets/img/logo/logo228.png', NULL, 'sdkerdonmiri2@gmail.com', '-', 'Assalamu Alaikum\r\n\r\nMohon informasi PPDB', 'Assalamu Alaikum\r\n\r\nMohon informasi PPDB', '82226246960', '<p>Pembayaran Pendaftaran bisa di transfer melalui :<br>BRI - 12353435 - SDN Kerdonmiri</p><p>BCA - 123513 - SDN Kerdonmiri</p>', '<p><br></p><ol><li>Surat Keterangan Lulus</li><li>Akta Kelahiran</li><li>Kartu Keluarga</li></ol>', ' Kab.Gunung Kidul', ' Kec. Rongkop', 'https://sdkerdonmiri2rongkop.pendidikan.gunungkidulkab.go.id/', 'Widodo', '-', '1', 'assets/img/kop/kop163.png', 'assets/img/logo/logo_ppdb237.png', '2023-05-08', '2021-05-20');
 
 -- --------------------------------------------------------
 
@@ -411,13 +417,13 @@ INSERT INTO `setting` (`id_setting`, `nama_sekolah`, `jenjang`, `nsm`, `npsn`, `
 --
 
 CREATE TABLE `siswa` (
-  `id_siswa` int(15) NOT NULL,
-  `no` int(11) NOT NULL,
-  `nama` varchar(50) NOT NULL,
-  `nisn` varchar(50) NOT NULL,
-  `password` varchar(20) NOT NULL,
-  `kelas` varchar(11) NOT NULL,
-  `status` int(5) NOT NULL
+  `id_siswa` int NOT NULL,
+  `no` int NOT NULL,
+  `nama` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `nisn` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
+  `kelas` varchar(11) COLLATE utf8mb4_general_ci NOT NULL,
+  `status` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -427,24 +433,24 @@ CREATE TABLE `siswa` (
 --
 
 CREATE TABLE `user` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int NOT NULL,
   `nama_user` varchar(128) NOT NULL,
   `level` varchar(128) NOT NULL,
   `username` varchar(128) NOT NULL,
   `password` text NOT NULL,
-  `status` int(1) NOT NULL,
-  `foto` int(11) NOT NULL,
+  `status` int NOT NULL,
+  `foto` int NOT NULL,
   `mapel` text NOT NULL,
   `nuptk` text NOT NULL,
   `jenkel` varchar(20) NOT NULL,
   `tempat_lahir` text NOT NULL,
   `tgl_lahir` date NOT NULL,
-  `tmt` year(4) NOT NULL,
+  `tmt` year NOT NULL,
   `no_sk` text NOT NULL,
   `jenis` text NOT NULL,
   `no_hp` varchar(20) NOT NULL,
-  `nik` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `nik` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user`
@@ -551,37 +557,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `daftar`
 --
 ALTER TABLE `daftar`
-  MODIFY `id_daftar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `id_daftar` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
 
 --
 -- AUTO_INCREMENT for table `histori`
 --
 ALTER TABLE `histori`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `kontak`
 --
 ALTER TABLE `kontak`
-  MODIFY `id_kontak` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kontak` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `pengumuman`
 --
 ALTER TABLE `pengumuman`
-  MODIFY `id_pengumuman` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pengumuman` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(15) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
