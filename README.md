@@ -1,4 +1,12 @@
 # PPDB_SDN_KERDONMIRI
+
+# HOW TO USE
+1. clone repo ke local environment kalian
+2. import database yang ada di folder db
+3. konfigurasi pengaturan database di config/database.php
+4. doneee
+
+
 Dokumentasi Web PPDB SD N Kerdonmiri 2
 =======================================
 
