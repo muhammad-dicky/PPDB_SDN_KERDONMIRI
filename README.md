@@ -1,12 +1,8 @@
 # PPDB_SDN_KERDONMIRI
-⚠️ UNDER DEVELOPMENT ⚠️
-
-
-
 Dokumentasi Web PPDB SD N Kerdonmiri 2
 =======================================
 
-Web PPDB SD N Kerdonmiri 2 adalah sebuah aplikasi berbasis web untuk Penerimaan Peserta Didik Baru (PPDB) di SD N Kerdonmiri. Aplikasi ini dibangun menggunakan PHP versi 5.2.0 atau yang lebih tinggi. Di bawah ini adalah dokumentasi singkat tentang penggunaan aplikasi dan fitur-fitur yang tersedia.
+Web PPDB SD N Kerdonmiri 2 adalah sebuah aplikasi berbasis web untuk Penerimaan Peserta Didik Baru (PPDB) di SD N Kerdonmiri. Aplikasi ini dibangun menggunakan PHP versi 7.1 atau yang lebih tinggi. Di bawah ini adalah dokumentasi singkat tentang penggunaan aplikasi dan fitur-fitur yang tersedia.
 
 URL Login
 ---------
