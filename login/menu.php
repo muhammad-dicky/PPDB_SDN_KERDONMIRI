@@ -35,7 +35,7 @@
         <li class="dropdown ">
             <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire fa-fw"></i> <span>Data Master</span></a>
             <ul class="dropdown-menu">
-                <li><a class="nav-link" href="?pg=sekolah">Master Sekolah</a></li>
+                <!-- <li><a class="nav-link" href="?pg=sekolah">Master Sekolah</a></li> -->
                 <li><a class="nav-link" href="?pg=jurusan">Master Jurusan</a></li>
                 <li><a class="nav-link" href="?pg=jenis">Master Jenis Daftar</a></li>
             </ul>

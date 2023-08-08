@@ -145,13 +145,13 @@
                                     <td><?= $no; ?></td>
                                     <td><?= $bayar['id_bayar'] ?></td>
                                     <td><?= $bayar['nama'] ?></td>
-                                    <td><?= "Rp " . number_format($bayar['jumlah'], 0, ",", ".") ?></td>
+                                    <td><?= "Rp " . number_format($bayar['id_daftar'], 0, ",", ".") ?></td>
                                     <td><?= $bayar['tgl_bayar'] ?></td>
                                     <td>
                                         <?php if ($bayar['verifikasi'] == 1) { ?>
                                             <span class="badge badge-success">Pembayaran diterima</span>
                                         <?php } else { ?>
-                                            <span class="badge badge-warning">Proses Cek</span>
+                                            <span class="badge badge-success">Proses Cek</span>
                                         <?php } ?>
                                     </td>
                                     <td><a target="_blank" class="btn btn-primary btn-sm" href="mod_bayar/<?= $bayar['bukti'] ?>" role="button"><i class="fas fa-eye"></i> bukti</a></td>
