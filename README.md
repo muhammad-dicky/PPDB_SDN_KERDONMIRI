@@ -1,12 +1,22 @@
 # PPDB_SDN_KERDONMIRI
-⚠️ UNDER DEVELOPMENT ⚠️
 
+![image](https://github.com/muhammad-dicky/PPDB_SDN_KERDONMIRI/assets/58357765/10841cdf-8d9c-4cf0-a6f1-f6d6a6ab349d)
+![image](https://github.com/muhammad-dicky/PPDB_SDN_KERDONMIRI/assets/58357765/f0eb40d8-3a93-4a4c-82ed-e9a09fabb7df)
+![image](https://github.com/muhammad-dicky/PPDB_SDN_KERDONMIRI/assets/58357765/4c1f992c-b2c1-42cb-bf2c-10eff761b6e0)
+
+
+
+# HOW TO USE
+1. clone repo ke local environment kalian
+2. import database yang ada di folder db
+3. konfigurasi pengaturan database di config/database.php
+4. doneee
 
 
 Dokumentasi Web PPDB SD N Kerdonmiri 2
 =======================================
 
-Web PPDB SD N Kerdonmiri 2 adalah sebuah aplikasi berbasis web untuk Penerimaan Peserta Didik Baru (PPDB) di SD N Kerdonmiri. Aplikasi ini dibangun menggunakan PHP versi 5.2.0 atau yang lebih tinggi. Di bawah ini adalah dokumentasi singkat tentang penggunaan aplikasi dan fitur-fitur yang tersedia.
+Web PPDB SD N Kerdonmiri 2 adalah sebuah aplikasi berbasis web untuk Penerimaan Peserta Didik Baru (PPDB) di SD N Kerdonmiri. Aplikasi ini dibangun menggunakan PHP versi 7.1 atau yang lebih tinggi. Di bawah ini adalah dokumentasi singkat tentang penggunaan aplikasi dan fitur-fitur yang tersedia.
 
 URL Login
 ---------
